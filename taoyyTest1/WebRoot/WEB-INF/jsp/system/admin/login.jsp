@@ -101,6 +101,7 @@
         <div data-src="static/login/images/banner_slide_01.jpg"></div>
         <div data-src="static/login/images/banner_slide_02.jpg"></div>
         <div data-src="static/login/images/banner_slide_03.jpg"></div>
+        <div data-src="static/login/images/banner_slide_04.jpg"></div>
     </div>
     <!-- #camera_wrap_3 -->
 </div>
@@ -121,7 +122,6 @@
                 cache: false,
                 success: function (data) {
                     if ("success" == data.result) {
-                        alert (data.toString());
                         saveCookie ();
                         window.location.href = "main/index";
                     } else if ("usererror" == data.result) {
@@ -129,18 +129,18 @@
                             side: 1,
                             msg: "用户名或密码有误",
                             bg: '#FF5080',
-                            time: 15
+                            time: 5
                         });
                         $ ("#loginname").focus ();
                     } else if ("codeerror" == data.result) {
                         $ (".jq_tips_info").hide ();
                         changeCode ();
-                        $ ("#code").val("");
+                        $ ("#code").val ("");
                         $ ("#code").tips ({
                             side: 1,
                             msg: "验证码输入有误",
                             bg: '#FF5080',
-                            time: 15
+                            time: 5
                         });
                         $ ("#code").focus ();
                         $ ("#codeImg").bind ("click", changeCode);
@@ -149,10 +149,20 @@
                             side: 1,
                             msg: "缺少参数",
                             bg: '#FF5080',
-                            time: 15
+                            time: 5
                         });
                         $ ("#loginname").focus ();
                     }
+                },
+                error: function () {
+                    $ ("#code").val ("");
+                    $ ("#loginbox").val ("");
+                    $ ("#loginbox").tips ({
+                        side: 1,
+                        msg: '数据库异常，请稍后再试',
+                        bg: '#ff0000',
+                        time: 5
+                    });
                 }
             });
         }
@@ -211,7 +221,7 @@
             side: 1,
             msg: '正在登录 , 请稍后 ...',
             bg: '#68B500',
-            time: 10
+            time: 5
         });
         return true;
     }

@@ -104,7 +104,6 @@
     </error-page>
 
 
-    <!--
          <error-page>
             <error-code>405</error-code>
            <location>/WEB-INF/405.html</location>
@@ -125,7 +124,6 @@
            <error-code>java.lang.NullPointerException</error-code>
            <location>/WEB-INF/error.html</location>
          </error-page>
-    -->
     <session-config>
         <session-timeout>600</session-timeout>
     </session-config>
