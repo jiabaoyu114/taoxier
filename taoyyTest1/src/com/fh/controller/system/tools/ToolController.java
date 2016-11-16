@@ -21,17 +21,17 @@ import com.fh.util.PageData;
 import com.fh.util.PathUtil;
 import com.fh.util.TwoDimensionCode;
 
-/** 
+/**
  * 类名称：ToolController
- * 创建人：FH 
+ * 创建人：FH
  * 创建时间：2015年4月4日
  * @version
  */
 @Controller
 @RequestMapping(value="/tool")
 public class ToolController extends BaseController {
-	
-	
+
+
 	/**
 	 * 去接口测试页面
 	 */
@@ -44,10 +44,10 @@ public class ToolController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
-	
+
 	/**
 	 *	接口内部请求
-	 * @param 
+	 * @param
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/severTest")
@@ -61,14 +61,14 @@ public class ToolController extends BaseController {
 			long startTime = System.currentTimeMillis(); 					//请求起始时间_毫秒
 			URL url = new URL(pd.getString("serverUrl"));
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod(pd.getString("requestMethod"));		//请求类型  POST or GET	
+			connection.setRequestMethod(pd.getString("requestMethod"));		//请求类型  POST or GET
 			BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			long endTime = System.currentTimeMillis(); 						//请求结束时间_毫秒
 			String temp = "";
-			while((temp = in.readLine()) != null){ 
+			while((temp = in.readLine()) != null){
 				str = str + temp;
 			}
-			rTime = String.valueOf(endTime - startTime); 
+			rTime = String.valueOf(endTime - startTime);
 		}
 		catch(Exception e){
 			errInfo = "error";
@@ -78,7 +78,7 @@ public class ToolController extends BaseController {
 		map.put("rTime", rTime);		//服务器请求时间 毫秒
 		return AppUtil.returnObject(new PageData(), map);
 	}
-	
+
 	/**
 	 * 发送邮件页面
 	 */
@@ -91,7 +91,7 @@ public class ToolController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
-	
+
 	/**
 	 * 二维码页面
 	 */
@@ -104,7 +104,7 @@ public class ToolController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
-	
+
 	/**
 	 *	生成二维码
 	 * @param args
@@ -132,7 +132,7 @@ public class ToolController extends BaseController {
 		map.put("encoderImgId", encoderImgId);			//二维码图片名
 		return AppUtil.returnObject(new PageData(), map);
 	}
-	
+
 	/**
 	 *	解析二维码
 	 * @param args
@@ -160,8 +160,8 @@ public class ToolController extends BaseController {
 		map.put("readContent", readContent);			//读取的内容
 		return AppUtil.returnObject(new PageData(), map);
 	}
-	
-	
+
+
 	/**
 	 * 多级别树页面
 	 */
@@ -174,7 +174,7 @@ public class ToolController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
-	
+
 	/**
 	 * 地图页面
 	 */
@@ -187,7 +187,7 @@ public class ToolController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
-	
+
 	/**
 	 * 获取地图坐标页面
 	 */
@@ -200,7 +200,7 @@ public class ToolController extends BaseController {
 		mv.addObject("pd", pd);
 		return mv;
 	}
-	
+
 	/**
 	 *	根据经纬度计算距离
 	 * @param args
@@ -222,5 +222,5 @@ public class ToolController extends BaseController {
 		map.put("distance", distance);			//距离
 		return AppUtil.returnObject(new PageData(), map);
 	}
-	
+
 }

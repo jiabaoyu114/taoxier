@@ -214,7 +214,9 @@ public class Tools {
 		paraname = (null == paraname)? "":paraname;
 		return MD5.md5(paraname+DateUtil.getDays()+",fh,").equals(FKEY);
 	}
-	 
+
+
+
 	/**
 	 * 读取txt里的单行内容
 	 * @param filePath  文件路径
