@@ -1,11 +1,11 @@
 package com.fh.controller.information.featured;
 
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
+import com.fh.service.information.featured.FeaturedService;
+import com.fh.util.Const;
+import com.fh.util.DateUtil;
+import com.fh.util.PageData;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
@@ -14,18 +14,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fh.controller.base.BaseController;
-import com.fh.entity.Page;
-import com.fh.entity.system.Menu;
-import com.fh.service.information.featured.FeaturedService;
-import com.fh.util.Const;
-import com.fh.util.DateUtil;
-import com.fh.util.PageData;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /** 
  * 类名称：FeaturedController
- * 创建人：FH 
- * 创建时间：2014年12月1日
+ * 创建人：陶应意
+ *   创建时间：2014年12月1日
  * @version
  */
 @Controller
@@ -34,9 +33,13 @@ public class FeaturedController extends BaseController{
 	
 	@Resource(name="featuredService")
 	private FeaturedService featuredService;
-	
+
 	/**
-	 * 列表
+	 *
+	 * @param session
+	 * @param page
+	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView listUsers(HttpSession session, Page page) throws Exception{

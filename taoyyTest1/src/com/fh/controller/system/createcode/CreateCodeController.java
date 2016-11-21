@@ -1,16 +1,5 @@
 package com.fh.controller.system.createcode;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.fh.controller.base.BaseController;
 import com.fh.util.DelAllFile;
 import com.fh.util.FileDownload;
@@ -19,10 +8,21 @@ import com.fh.util.Freemarker;
 import com.fh.util.PageData;
 import com.fh.util.PathUtil;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 /** 
  * 类名称：FreemarkerController
- * 创建人：FH 
- * 创建时间：2015年1月12日
+ * 创建人：陶应意
+ *   创建时间： 2016年1月12日
  * @version
  */
 @Controller
@@ -39,6 +39,7 @@ public class CreateCodeController extends BaseController {
 		
 		/* ============================================================================================= */
 		String packageName = pd.getString("packageName");  			//包名				========1
+		String packageText = pd.getString("packageText");	   			//功能描述				========2
 		String objectName = pd.getString("objectName");	   			//类名				========2
 		String zindext = pd.getString("zindex");	   	   			//属性总数
 		int zindex = 0;
@@ -53,6 +54,7 @@ public class CreateCodeController extends BaseController {
 		Map<String,Object> root = new HashMap<String,Object>();		//创建数据模型
 		root.put("fieldList", fieldList);
 		root.put("packageName", packageName);						//包名
+		root.put("packageText", packageText);						//功能描述
 		root.put("objectName", objectName);							//类名
 		root.put("objectNameLower", objectName.toLowerCase());		//类名(全小写)
 		root.put("objectNameUpper", objectName.toUpperCase());		//类名(全大写)

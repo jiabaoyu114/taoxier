@@ -25,8 +25,8 @@ import com.fh.util.PageData;
 
 /** 
  * 类名称：NoticeController
- * 创建人：FH 
- * 创建时间：2014年12月1日
+ * 创建人：陶应意
+ *   创建时间：2014年12月1日
  * @version
  */
 @Controller

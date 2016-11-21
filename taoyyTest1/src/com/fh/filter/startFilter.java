@@ -1,5 +1,7 @@
 package com.fh.filter;
 
+import com.fh.controller.base.BaseController;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,13 +15,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import com.fh.controller.base.BaseController;
-
 /**
  * 登录验证过滤器
 
- * 创建人：FH 
- * 创建时间：2014年2月17日
+ * 创建人：陶应意
+ *   创建时间：2014年2月17日
  * @version
  */
 public class startFilter extends BaseController implements Filter{

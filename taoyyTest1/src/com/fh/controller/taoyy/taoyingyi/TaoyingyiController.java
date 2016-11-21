@@ -1,5 +1,24 @@
 package com.fh.controller.taoyy.taoyingyi;
 
+import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
+import com.fh.service.taoyy.taoyingyi.TaoyingyiService;
+import com.fh.util.AppUtil;
+import com.fh.util.Const;
+import com.fh.util.ObjectExcelView;
+import com.fh.util.PageData;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -10,34 +29,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.fh.controller.base.BaseController;
-import com.fh.entity.system.Menu;
-import com.fh.entity.Page;
-import com.fh.util.AppUtil;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.Const;
-import com.fh.util.PageData;
-import com.fh.util.Tools;
-import com.fh.service.taoyy.taoyingyi.TaoyingyiService;
 
 /** 
  * 类名称：TaoyingyiController
- * 创建人：FH 
- * 创建时间：2016-05-11
+ * 创建人：陶应意
+ *   创建时间：2016-05-11
  */
 @Controller
 @RequestMapping(value="/taoyingyi")
@@ -45,9 +41,11 @@ public class TaoyingyiController extends BaseController {
 	
 	@Resource(name="taoyingyiService")
 	private TaoyingyiService taoyingyiService;
-	
+
 	/**
-	 * 新增
+	 *
+	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
@@ -80,9 +78,11 @@ public class TaoyingyiController extends BaseController {
 		}
 		
 	}
-	
+
 	/**
-	 * 修改
+	 *
+	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
@@ -95,9 +95,11 @@ public class TaoyingyiController extends BaseController {
 		mv.setViewName("save_result");
 		return mv;
 	}
-	
+
 	/**
-	 * 列表
+	 *
+	 * @param page
+	 * @return
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page){
@@ -117,9 +119,10 @@ public class TaoyingyiController extends BaseController {
 		}
 		return mv;
 	}
-	
+
 	/**
-	 * 去新增页面
+	 *
+	 * @return
 	 */
 	@RequestMapping(value="/goAdd")
 	public ModelAndView goAdd(){

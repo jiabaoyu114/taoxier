@@ -22,7 +22,7 @@ import com.fh.util.RightsHelper;
 * @author 陶应意
 * 作者单位： 
 * 联系方式：
-* 创建时间：2015年1月1日
+*   创建时间： 2016年1月1日
 * @version 1.6
  */
 public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{

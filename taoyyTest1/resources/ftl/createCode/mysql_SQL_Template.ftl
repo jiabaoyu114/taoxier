@@ -4,8 +4,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `TB_${objectNameUpper}`
 -- ----------------------------
-DROP TABLE IF EXISTS `TB_${objectNameUpper}`;
-CREATE TABLE `TB_${objectNameUpper}` (
+DROP TABLE IF EXISTS `tb_${objectNameUpper}`;
+CREATE TABLE `tb_${objectNameUpper}` (
  		`${objectNameUpper}_ID` varchar(100) NOT NULL,
 	<#list fieldList as var>
 		<#if var[1] == 'Integer'>

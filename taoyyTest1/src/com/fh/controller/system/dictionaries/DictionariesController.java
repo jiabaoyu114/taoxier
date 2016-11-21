@@ -23,7 +23,7 @@ import com.fh.util.PageData;
 /** 
  * 类名称：DictionariesController
  * 创建人：FH
- * 创建时间：2014年9月2日
+ *   创建时间：2014年9月2日
  * @version
  */
 @Controller

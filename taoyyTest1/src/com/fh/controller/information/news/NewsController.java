@@ -31,8 +31,8 @@ import com.fh.util.PathUtil;
 
 /** 
  * 类名称：NewsController
- * 创建人：FH 
- * 创建时间：2014年12月1日
+ * 创建人：陶应意
+ *   创建时间：2014年12月1日
  * @version
  */
 @Controller

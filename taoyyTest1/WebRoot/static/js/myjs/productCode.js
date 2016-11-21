@@ -1,9 +1,9 @@
 /**
- * @FH
+ * @TAOYY
  */	
 	//生成
 	function save(){
-		
+	//包名
 		if($("#packageName").val()==""){
 			$("#packageName").tips({
 				side:3,
@@ -14,7 +14,7 @@
 			$("#packageName").focus();
 			return false;
 		}else{
-			var pat = new RegExp("^[A-Za-z]+$");
+			var pat = new RegExp("^[a-z0-9]+$");
 			if(!pat.test($("#packageName").val())){
 				$("#packageName").tips({
 					side:3,
@@ -26,7 +26,30 @@
 				return false;
 			}
 		}
-		
+		//功能描述
+	var packageText = $ ("#packageText").val ().trim();
+		if(packageText==""){
+			$("#packageText").tips({
+				side:3,
+	            msg:'输入功能描述',
+	            bg:'#AE81FF',
+	            time:2
+	        });
+			$("#packageText").focus();
+			return false;
+		}else{
+			if(packageText.length >20){
+				$("#packageText").tips({
+					side:3,
+		            msg:'功能描述太长，不能超过20个汉字',
+		            bg:'#AE81FF',
+		            time:2
+		        });
+				$("#packageText").focus();
+				return false;
+			}
+		}
+		//处理类名
 		if($("#objectName").val()==""){
 			$("#objectName").tips({
 				side:3,
@@ -82,7 +105,6 @@
 	
 	//保存编辑属性
 	function saveD(){
-		
 		var dname = $("#dname").val(); 	 		 //属性名
 		var dtype = $("#dtype").val(); 	 		 //类型
 		var dbz	  = $("#dbz").val();   	 		 //备注
@@ -100,7 +122,7 @@
 			$("#dname").focus();
 			return false;
 		}else{
-			dname = dname.toUpperCase();		//转化为大写
+			//dname = dname.toUpperCase();		//转化为大写
 			if(isSame(dname)){
 				var headstr = dname.substring(0,1);
 				var pat = new RegExp("^[0-9]+$");

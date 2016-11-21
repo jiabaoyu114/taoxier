@@ -1,5 +1,7 @@
 package com.fh.util;
 
+import com.swetake.util.Qrcode;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -13,12 +15,10 @@ import javax.imageio.ImageIO;
 import jp.sourceforge.qrcode.QRCodeDecoder;
 import jp.sourceforge.qrcode.exception.DecodingFailedException;
 
-import com.swetake.util.Qrcode;
-
 
 /**
  * 二维码
- * 创建人：FH 创建时间：2015年4月10日
+ * 创建人：陶应意  创建时间： 2016年4月10日
  * @version
  */
 public class TwoDimensionCode {

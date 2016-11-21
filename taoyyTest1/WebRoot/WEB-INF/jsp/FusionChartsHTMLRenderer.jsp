@@ -99,7 +99,7 @@
 	
 	
 %> 
-			<!--START Code Block for Chart <%=chartId%> -->
+	<%--		<!--START Code Block for Chart <%=chartId%> -->
 			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" 
 			width="<%= chartWidth%>" height="<%= chartHeight%>" id="<%= chartId%>">
 			<param name="allowScriptAccess" value="always" />
@@ -115,7 +115,7 @@
                         pluginspage="http://www.macromedia.com/go/getflashplayer" 
                         wmode="transparent" bgcolor="<%=color%>" />
 			</object>
-			<!--END Code Block for Chart <%=chartId%> -->
+			<!--END Code Block for Chart <%=chartId%> -->--%>
 <%!
     /**
      * Converts a Boolean value to int value<br>

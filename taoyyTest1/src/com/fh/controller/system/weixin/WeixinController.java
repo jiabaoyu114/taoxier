@@ -63,7 +63,7 @@ import javax.net.ssl.X509TrustManager;
 * @author fuhang
 * 作者单位： 
 * 联系方式：
-* 创建时间：2014年7月10日
+*   创建时间：2014年7月10日
 * @version 1.0
  */
 @Controller

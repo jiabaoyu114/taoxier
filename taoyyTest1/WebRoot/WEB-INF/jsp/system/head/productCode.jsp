@@ -102,8 +102,13 @@
 		<table style="margin-top: 10px;">
 			<tr>
 				<td style="width:15%;text-align: right;">上级包名：</td>
-				<td><input type="text" name="packageName" id="packageName" value="" placeholder="这里输入包名  (请不要输入特殊字符,请用纯字母)" style="width:370px" title="包名称"/></td>
-				<td>&nbsp;&nbsp;例如:com.fh.controller.<font color="red" style="font-weight: bold;">system</font>&nbsp;&nbsp;红色部分</td>
+				<td><input type="text" name="packageName" id="packageName" value="manager" style="width:370px" title="包名称"/></td>
+				<td>&nbsp;&nbsp;例如:com.fh.controller.<font color="red" style="font-weight: bold;">manager</font>&nbsp;&nbsp;红色部分</td>
+			</tr>
+			<tr>
+				<td style="width:15%;text-align: right;">功能描述：</td>
+				<td><input type="text" name="packageName" id="packageText" value="" maxlength="20" placeholder="这里输入您要生成的功能" style="width:370px" title="功能描述"/></td>
+				<td>&nbsp;&nbsp;例如:<font color="red" style="font-weight: bold;">用户</font>管理、<font color="red" style="font-weight: bold;">权限</font>管理&nbsp;&nbsp;红色部分</td>
 			</tr>
 			<tr>
 				<td style="width:15%;text-align: right;">处理类名：</td>
@@ -152,7 +157,7 @@
 		<script src="static/js/bootstrap.min.js"></script>
 		<script src="static/js/ace-elements.min.js"></script>
 		<script src="static/js/ace.min.js"></script>
-		<script src="static/js/myjs/productCode.min.js"></script>
+		<script src="static/js/myjs/productCode.js"></script>
 		<script type="text/javascript">
 		$(top.hangge());
 		</script>

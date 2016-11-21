@@ -24,7 +24,7 @@ import com.fh.util.TwoDimensionCode;
 /**
  * 类名称：ToolController
  * 创建人：FH
- * 创建时间：2015年4月4日
+ *   创建时间： 2016年4月4日
  * @version
  */
 @Controller

@@ -46,8 +46,8 @@ import com.fh.util.Tools;
 
 /** 
  * 类名称：UserController
- * 创建人：FH 
- * 创建时间：2014年6月28日
+ * 创建人：陶应意
+ *   创建时间：2014年6月28日
  * @version
  */
 @Controller

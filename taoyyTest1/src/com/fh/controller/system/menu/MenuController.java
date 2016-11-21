@@ -19,8 +19,8 @@ import com.fh.service.system.menu.MenuService;
 import com.fh.util.PageData;
 /** 
  * 类名称：MenuController
- * 创建人：FH 
- * 创建时间：2014年7月1日
+ * 创建人：陶应意
+ *   创建时间：2014年7月1日
  * @version
  */
 @Controller

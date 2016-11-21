@@ -3,7 +3,7 @@
 <mapper namespace="${objectName}Mapper">
 	
 	
-	<!-- 新增-->
+	<!-- 新增${packageText}-->
 	<insert id="save" parameterType="pd">
 		insert into "TB_${objectNameUpper}"(
 	<#list fieldList as var>
@@ -19,7 +19,7 @@
 	</insert>
 	
 	
-	<!-- 删除-->
+	<!-- 删除${packageText}-->
 	<delete id="delete" parameterType="pd">
 		delete from "TB_${objectNameUpper}"
 		where 
@@ -27,7 +27,7 @@
 	</delete>
 	
 	
-	<!-- 修改 -->
+	<!-- 修改${packageText} -->
 	<update id="edit" parameterType="pd">
 		update  "TB_${objectNameUpper}"
 			set 
@@ -42,7 +42,7 @@
 	</update>
 	
 	
-	<!-- 通过ID获取数据 -->
+	<!-- 通过ID获取${packageText}数据 -->
 	<select id="findById" parameterType="pd" resultType="pd">
 		select 
 	<#list fieldList as var>
@@ -56,7 +56,7 @@
 	</select>
 	
 	
-	<!-- 列表 -->
+	<!-- 列表${packageText} -->
 	<select id="datalistPage" parameterType="page" resultType="pd">
 		select
 		<#list fieldList as var>
@@ -67,7 +67,7 @@
 				"TB_${objectNameUpper}" a
 	</select>
 	
-	<!-- 列表(全部) -->
+	<!-- ${packageText}列表(全部) -->
 	<select id="listAll" parameterType="pd" resultType="pd">
 		select
 		<#list fieldList as var>
@@ -78,7 +78,7 @@
 				"TB_${objectNameUpper}" a
 	</select>
 	
-	<!-- 批量删除 -->
+	<!-- 批量删除${packageText} -->
 	<delete id="deleteAll" parameterType="String">
 		delete from "TB_${objectNameUpper}"
 		where 

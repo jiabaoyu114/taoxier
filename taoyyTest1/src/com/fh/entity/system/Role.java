@@ -6,7 +6,7 @@ package com.fh.entity.system;
 * @author 陶应意
 * 作者单位： 
 * 联系方式：
-* 创建时间：2014年3月10日
+*   创建时间：2014年3月10日
 * @version 1.0
  */
 public class Role {
