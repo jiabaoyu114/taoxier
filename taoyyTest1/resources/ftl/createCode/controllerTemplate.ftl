@@ -58,7 +58,7 @@ public class ${objectName}Controller extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("${objectNameUpper}_ID", this.get32UUID());	//主键
+		pd.put("${objectNameLower}_ID", this.get32UUID());	//主键
 <#list fieldList as var>
 	<#if var[3] == "否">
 		<#if var[1] == 'Date'>
@@ -69,7 +69,7 @@ public class ${objectName}Controller extends BaseController {
 	</#if>
 </#list>
 		${objectNameLower}Service.save(pd);
-		mv.addObject("msg","success");
+		mv.addObject(MSG,SUCCESS);
 		mv.setViewName("save_result");
 		return mv;
 	}
@@ -86,7 +86,7 @@ public class ${objectName}Controller extends BaseController {
 		try{
 			pd = this.getPageData();
 			${objectNameLower}Service.delete(pd);
-			out.write("success");
+			out.write(SUCCESS);
 			out.close();
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -106,7 +106,7 @@ public class ${objectName}Controller extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		${objectNameLower}Service.edit(pd);
-		mv.addObject("msg","success");
+		mv.addObject(MSG,SUCCESS);
 		mv.setViewName("save_result");
 		return mv;
 	}
@@ -125,7 +125,7 @@ public class ${objectName}Controller extends BaseController {
 			List<PageData>	varList = ${objectNameLower}Service.list(page);	//列出${objectName}列表
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_list");
 			mv.addObject("varList", varList);
-			mv.addObject("pd", pd);
+			mv.addObject(PD, pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -144,8 +144,8 @@ public class ${objectName}Controller extends BaseController {
 		pd = this.getPageData();
 		try {
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
-			mv.addObject("msg", "save");
-			mv.addObject("pd", pd);
+			mv.addObject(MSG, "save");
+			mv.addObject(PD, pd);
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
 		}
@@ -164,8 +164,8 @@ public class ${objectName}Controller extends BaseController {
 		try {
 			pd = ${objectNameLower}Service.findById(pd);	//根据ID读取
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
-			mv.addObject("msg", "edit");
-			mv.addObject("pd", pd);
+			mv.addObject(MSG, "edit");
+			mv.addObject(PD, pd);
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
 		}
@@ -188,9 +188,9 @@ public class ${objectName}Controller extends BaseController {
 			if(null != DATA_IDS && !"".equals(DATA_IDS)){
 				String ArrayDATA_IDS[] = DATA_IDS.split(",");
 				${objectNameLower}Service.deleteAll(ArrayDATA_IDS);
-				pd.put("msg", "ok");
+				pd.put(MSG, OK);
 			}else{
-				pd.put("msg", "no");
+				pd.put(MSG, NO);
 			}
 			pdList.add(pd);
 			map.put("list", pdList);

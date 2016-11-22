@@ -73,7 +73,7 @@
 						<c:forEach items="${r"${varList}"}" var="var" varStatus="vs">
 							<tr>
 								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${r"${var."}${objectNameUpper}_ID${r"}"}" /><span class="lbl"></span></label>
+									<label><input type='checkbox' name='ids' value="${r"${var."}${objectNameLower}_ID${r"}"}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${r"${vs.index+1}"}</td>
 								<#list fieldList as var>
@@ -89,10 +89,10 @@
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
 											<c:if test="${r"${QX.edit == 1 }"}">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${r"${var."}${objectNameLower}_ID${r"}"}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 											</c:if>
 											<c:if test="${r"${QX.del == 1 }"}">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${r"${var."}${objectNameUpper}_ID${r"}"}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+											<li><a style="cursor:pointer;" title="删除" onclick="del('${r"${var."}${objectNameLower}_ID${r"}"}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 											</c:if>
 										</ul>
 										</div>
@@ -200,7 +200,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>${objectNameLower}/delete.do?${objectNameUpper}_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>${objectNameLower}/delete.do?${objectNameLower}_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${r"${page.currentPage}"});
 					});
@@ -214,7 +214,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>${objectNameLower}/goEdit.do?${objectNameUpper}_ID='+Id;
+			 diag.URL = '<%=basePath%>${objectNameLower}/goEdit.do?${objectNameLower}_ID='+Id;
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件

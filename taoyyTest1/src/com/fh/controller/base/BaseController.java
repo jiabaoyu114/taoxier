@@ -16,6 +16,11 @@ public class BaseController {
     protected Logger logger = Logger.getLogger ( this.getClass () );
 
     private static final long serialVersionUID = 6357869213649815390L;
+    public static final String MSG = "msg";
+    public static final String SUCCESS = "success";
+    public static final String OK = "ok";
+    public static final String NO = "no";
+    public static final String PD = "pd";
 
     /**
      * 得到PageData

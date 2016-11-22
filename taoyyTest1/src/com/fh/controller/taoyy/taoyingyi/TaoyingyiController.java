@@ -56,7 +56,7 @@ public class TaoyingyiController extends BaseController {
 		pd.put("TAOYINGYI_ID", this.get32UUID());	//主键
 		pd.put("TAOTEXAS", "110");	//车号
 		taoyingyiService.save(pd);
-		mv.addObject("msg","success");
+		mv.addObject(MSG,SUCCESS);
 		mv.setViewName("save_result");
 		return mv;
 	}
@@ -112,7 +112,7 @@ public class TaoyingyiController extends BaseController {
 			List<PageData>	varList = taoyingyiService.list(page);	//列出Taoyingyi列表
 			mv.setViewName("taoyy/taoyingyi/taoyingyi_list");
 			mv.addObject("varList", varList);
-			mv.addObject("pd", pd);
+			mv.addObject(PD, pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		} catch(Exception e){
 			logger.error(e.toString(), e);
