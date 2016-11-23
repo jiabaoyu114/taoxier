@@ -117,11 +117,11 @@ public class Tools {
 		String resultTimes = "";
 		
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	    java.util.Date now;
+	    Date now;
 	    
 	    try {
 	    	now = new Date();
-	    	java.util.Date date=df.parse(StrDate);
+	    	Date date=df.parse(StrDate);
 	    	long times = now.getTime()-date.getTime();
 	    	long day  =  times/(24*60*60*1000);
 	    	long hour = (times/(60*60*1000)-day*24);
@@ -214,9 +214,7 @@ public class Tools {
 		paraname = (null == paraname)? "":paraname;
 		return MD5.md5(paraname+DateUtil.getDays()+",fh,").equals(FKEY);
 	}
-
-
-
+	 
 	/**
 	 * 读取txt里的单行内容
 	 * @param filePath  文件路径

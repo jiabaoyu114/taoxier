@@ -1,16 +1,21 @@
 package com.fh.controller.system.user;
 
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
+import com.fh.controller.base.BaseController;
+import com.fh.entity.Page;
+import com.fh.entity.system.Role;
+import com.fh.service.system.menu.MenuService;
+import com.fh.service.system.role.RoleService;
+import com.fh.service.system.user.UserService;
+import com.fh.util.AppUtil;
+import com.fh.util.Const;
+import com.fh.util.FileDownload;
+import com.fh.util.FileUpload;
+import com.fh.util.GetPinyin;
+import com.fh.util.ObjectExcelRead;
+import com.fh.util.ObjectExcelView;
+import com.fh.util.PageData;
+import com.fh.util.PathUtil;
+import com.fh.util.Tools;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -26,23 +31,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fh.controller.base.BaseController;
-import com.fh.entity.Page;
-import com.fh.entity.system.Menu;
-import com.fh.entity.system.Role;
-import com.fh.service.system.menu.MenuService;
-import com.fh.service.system.role.RoleService;
-import com.fh.service.system.user.UserService;
-import com.fh.util.AppUtil;
-import com.fh.util.Const;
-import com.fh.util.FileDownload;
-import com.fh.util.FileUpload;
-import com.fh.util.GetPinyin;
-import com.fh.util.ObjectExcelRead;
-import com.fh.util.PageData;
-import com.fh.util.ObjectExcelView;
-import com.fh.util.PathUtil;
-import com.fh.util.Tools;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 /** 
  * 类名称：UserController
@@ -82,9 +81,9 @@ public class UserController extends BaseController {
 		
 		if(null == userService.findByUId(pd)){
 			userService.saveU(pd);
-			mv.addObject("msg","success");
+			mv.addObject(MSG,SUCCESS);
 		}else{
-			mv.addObject("msg","failed");
+			mv.addObject(MSG,"failed");
 		}
 		mv.setViewName("save_result");
 		return mv;
@@ -99,9 +98,9 @@ public class UserController extends BaseController {
 		try{
 			pd = this.getPageData();
 			if(userService.findByUId(pd) != null){
-				out.write("error");
+				out.write(ERROR);
 			}else{
-				out.write("success");
+				out.write(SUCCESS);
 			}
 			out.close();
 		} catch(Exception e){
@@ -120,9 +119,9 @@ public class UserController extends BaseController {
 			pd = this.getPageData();
 			
 			if(userService.findByUE(pd) != null){
-				out.write("error");
+				out.write(ERROR);
 			}else{
-				out.write("success");
+				out.write(SUCCESS);
 			}
 			out.close();
 		} catch(Exception e){
@@ -141,9 +140,9 @@ public class UserController extends BaseController {
 			pd = this.getPageData();
 			
 			if(userService.findByUN(pd) != null){
-				out.write("error");
+				out.write(ERROR);
 			}else{
-				out.write("success");
+				out.write(SUCCESS);
 			}
 			out.close();
 		} catch(Exception e){
@@ -164,7 +163,7 @@ public class UserController extends BaseController {
 			pd.put("PASSWORD", new SimpleHash("SHA-1", pd.getString("USERNAME"), pd.getString("PASSWORD")).toString());
 		}
 		userService.editU(pd);
-		mv.addObject("msg","success");
+		mv.addObject(MSG,SUCCESS);
 		mv.setViewName("save_result");
 		return mv;
 	}
@@ -192,8 +191,8 @@ public class UserController extends BaseController {
 		List<Role> roleList = roleService.listAllERRoles();			//列出所有二级角色
 		pd = userService.findByUiId(pd);							//根据ID读取
 		mv.setViewName("system/user/user_edit");
-		mv.addObject("msg", "editU");
-		mv.addObject("pd", pd);
+		mv.addObject(MSG, "editU");
+		mv.addObject(PD, pd);
 		mv.addObject("roleList", roleList);
 		
 		return mv;
@@ -212,8 +211,8 @@ public class UserController extends BaseController {
 		roleList = roleService.listAllERRoles();			//列出所有二级角色
 		
 		mv.setViewName("system/user/user_edit");
-		mv.addObject("msg", "saveU");
-		mv.addObject("pd", pd);
+		mv.addObject(MSG, "saveU");
+		mv.addObject(PD, pd);
 		mv.addObject("roleList", roleList);
 
 		return mv;
@@ -254,7 +253,7 @@ public class UserController extends BaseController {
 		mv.setViewName("system/user/user_list");
 		mv.addObject("userList", userList);
 		mv.addObject("roleList", roleList);
-		mv.addObject("pd", pd);
+		mv.addObject(PD, pd);
 		mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		return mv;
 	}
@@ -271,7 +270,7 @@ public class UserController extends BaseController {
 		List<PageData>	userList = userService.listAllUser(pd);			//列出用户列表
 		mv.setViewName("system/user/user_tb_list");
 		mv.addObject("userList", userList);
-		mv.addObject("pd", pd);
+		mv.addObject(PD, pd);
 		mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		return mv;
 	}
@@ -285,7 +284,7 @@ public class UserController extends BaseController {
 		try{
 			pd = this.getPageData();
 			userService.deleteU(pd);
-			out.write("success");
+			out.write(SUCCESS);
 			out.close();
 		} catch(Exception e){
 			logger.error(e.toString(), e);
@@ -309,9 +308,9 @@ public class UserController extends BaseController {
 			if(null != USER_IDS && !"".equals(USER_IDS)){
 				String ArrayUSER_IDS[] = USER_IDS.split(",");
 				userService.deleteAllU(ArrayUSER_IDS);
-				pd.put("msg", "ok");
+				pd.put(MSG, OK);
 			}else{
-				pd.put("msg", "no");
+				pd.put(MSG, NO);
 			}
 			
 			pdList.add(pd);
@@ -480,7 +479,7 @@ public class UserController extends BaseController {
 			}
 			/*存入数据库操作======================================*/
 			
-			mv.addObject("msg","success");
+			mv.addObject(MSG,SUCCESS);
 		}
 		
 		mv.setViewName("save_result");

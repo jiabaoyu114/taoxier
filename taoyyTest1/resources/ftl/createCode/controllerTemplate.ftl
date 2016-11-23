@@ -162,7 +162,8 @@ public class ${objectName}Controller extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
-			pd = ${objectNameLower}Service.findById(pd);	//根据ID读取
+        	//根据ID读取
+			pd = ${objectNameLower}Service.findById(pd);
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
 			mv.addObject(MSG, "edit");
 			mv.addObject(PD, pd);

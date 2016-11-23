@@ -20,12 +20,12 @@ import static com.fh.util.FastJsonPlusUtils.objToJson;
 /**
  * 会员-接口类
  * 相关参数协议：
- * 00	请求失败
- * 01	请求成功
- * 02	返回空值
- * 03	请求协议参数不完整
- * 04  用户名或密码错误
- * 05  FKEY验证失败
+ * STR_ZERO     请求失败
+ * STR_ONE      请求成功
+ * STR_TWO      返回空值
+ * STR_THREE    请求协议参数不完整
+ * STR_FOUR     用户名或密码错误
+ * STR_FIVE  FKEY验证失败
  */
 @Controller
 @RequestMapping(value = "/appuser")
@@ -41,7 +41,7 @@ public class IntAppuserController extends BaseController {
     @ResponseBody
     public String getAppuserByUsernmae(String request) {
         Map<String, Object> map = new HashMap<String, Object> ();
-        String result = "00";
+        String result = STR_ZERO;
         logBefore ( logger, "根据用户名获取会员信息" );
         try {
             //解密
@@ -50,18 +50,18 @@ public class IntAppuserController extends BaseController {
                 PageData pd = this.getPageData ( request );
                 if (AppUtil.checkParam ( "getAppuserByUsernmae", pd )) {    //检查参数
                     pd = appuserService.findByUId ( pd );
-                    map.put ( "pd", pd );
-                    result = (null == pd) ? "02" : "01";
+                    map.put ( PD, pd );
+                    result = (null == pd) ? STR_TWO : STR_ONE;
                 } else {
-                    result = "03";
+                    result = STR_THREE;
                 }
             } else {
-                result = "05";
+                result = STR_FIVE;
             }
         } catch (Exception e) {
             logger.error ( e.toString (), e );
         } finally {
-            map.put ( "result", result );
+            map.put ( RESULT, result );
             logAfter ( logger );
         }
         //    return  AppUtil.returnObject ( new PageData (), map );

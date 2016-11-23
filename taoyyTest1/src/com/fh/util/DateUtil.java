@@ -121,9 +121,9 @@ public class DateUtil {
      */
     public static long getDaySub(String beginDateStr,String endDateStr){
         long day=0;
-        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date beginDate = null;
-        java.util.Date endDate = null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date beginDate = null;
+        Date endDate = null;
         
             try {
 				beginDate = format.parse(beginDateStr);

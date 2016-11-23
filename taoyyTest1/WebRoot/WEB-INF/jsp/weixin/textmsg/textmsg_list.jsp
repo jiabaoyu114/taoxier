@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,21 +24,21 @@
 	<div class="row-fluid">
 	
 			<!-- 检索  -->
-			<form action="taoyingyi/list.do" method="post" name="Form" id="Form">
+			<form action="textmsg/list.do" method="post" name="Form" id="Form">
 			<table>
 				<tr>
 					<td>
 						<span class="input-icon">
-							<input autocomplete="off" id="nav-search-input" type="text" name="field1" value="" placeholder="这里输入关键词" />
+							<input autocomplete="off" id="nav-search-input" type="text" name="KEYWORD" value="${pd.KEYWORD }" placeholder="这里输入关键词" />
 							<i id="nav-search-icon" class="icon-search"></i>
 						</span>
 					</td>
-					<td><input class="span10 date-picker" name="lastLoginStart" id="lastLoginStart" value="${pd.lastLoginStart}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期"/></td>
-					<td><input class="span10 date-picker" name="lastLoginEnd" id="lastLoginEnd" value="${pd.lastLoginEnd}" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期"/></td>
 					<td style="vertical-align:top;"> 
-					 	<select class="chzn-select" name="field2" id="field2" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-							<option value="">1</option>
-							<option value="">2</option>
+					 	<select class="chzn-select" name="STATUS" id="STATUS" data-placeholder="请选择状态" style="vertical-align:top;width: 120px;">
+							<option value=""></option>
+							<option value="">全部</option>
+							<option value="1" <c:if test="${pd.STATUS==1}">selected</c:if>>有效</option>
+							<option value="2" <c:if test="${pd.STATUS==2}">selected</c:if>>无效</option>
 					  	</select>
 					</td>
 					<td style="vertical-align:top;"><button class="btn btn-mini btn-light" onclick="search();"  title="检索"><i id="nav-search-icon" class="icon-search"></i></button></td>
@@ -56,13 +57,11 @@
 						<th class="center">
 						<label><input type="checkbox" id="zcheckbox" /><span class="lbl"></span></label>
 						</th>
-						<th>序号</th>
-						<th>名称</th>
-						<th>年龄</th>
-						<th>电话</th>
-						<th>邮件</th>
-						<th>未知一</th>
-						<th>车号</th>
+						<th class="center">序号</th>
+						<th class="center">关键词</th>
+						<th class="center">备注</th>
+						<th class="center">创建时间</th>
+						<th class="center">状态</th>
 						<th class="center">操作</th>
 					</tr>
 				</thead>
@@ -76,15 +75,16 @@
 						<c:forEach items="${varList}" var="var" varStatus="vs">
 							<tr>
 								<td class='center' style="width: 30px;">
-									<label><input type='checkbox' name='ids' value="${var.TAOYINGYI_ID}" /><span class="lbl"></span></label>
+									<label><input type='checkbox' name='ids' value="${var.TEXTMSG_ID}" /><span class="lbl"></span></label>
 								</td>
 								<td class='center' style="width: 30px;">${vs.index+1}</td>
-										<td>${var.TAONAME}</td>
-										<td>${var.TAOAGE}</td>
-										<td>${var.TAOTEL}</td>
-										<td>${var.TAOEMAIL}</td>
-										<td>${var.TAOASSOCIATION}</td>
-										<td>${var.TAOTEXAS}</td>
+										<td>${var.KEYWORD}</td>
+										<td>${var.BZ}</td>
+										<td style="width: 139px;">${var.CREATETIME}</td>
+										<td style="width: 60px;" class="center">
+											<c:if test="${var.STATUS == '2' }"><span class="label label-important arrowed-in">无效</span></c:if>
+											<c:if test="${var.STATUS == '1' }"><span class="label label-success arrowed">有效</span></c:if>
+										</td>
 								<td style="width: 30px;" class="center">
 									<div class='hidden-phone visible-desktop btn-group'>
 									
@@ -95,10 +95,10 @@
 										<button class="btn btn-mini btn-info" data-toggle="dropdown"><i class="icon-cog icon-only"></i></button>
 										<ul class="dropdown-menu dropdown-icon-only dropdown-light pull-right dropdown-caret dropdown-close">
 											<c:if test="${QX.edit == 1 }">
-											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.TAOYINGYI_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
+											<li><a style="cursor:pointer;" title="编辑" onclick="edit('${var.TEXTMSG_ID}');" class="tooltip-success" data-rel="tooltip" title="" data-placement="left"><span class="green"><i class="icon-edit"></i></span></a></li>
 											</c:if>
 											<c:if test="${QX.del == 1 }">
-											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.TAOYINGYI_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
+											<li><a style="cursor:pointer;" title="删除" onclick="del('${var.TEXTMSG_ID}');" class="tooltip-error" data-rel="tooltip" title="" data-placement="left"><span class="red"><i class="icon-trash"></i></span> </a></li>
 											</c:if>
 										</ul>
 										</div>
@@ -184,14 +184,14 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>taoyingyi/goAdd.do';
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.URL = '<%=basePath%>textmsg/goAdd.do';
+			 diag.Width = 600;
+			 diag.Height = 390;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 if('${page.currentPage}' == '0'){
 						 top.jzts();
-						 setTimeout("self.location.reload()",100);
+						 setTimeout("self.location=self.location",100);
 					 }else{
 						 nextPage(${page.currentPage});
 					 }
@@ -206,7 +206,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>taoyingyi/delete.do?TAOYINGYI_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>textmsg/delete.do?TEXTMSG_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -220,9 +220,9 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>taoyingyi/goEdit.do?TAOYINGYI_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.URL = '<%=basePath%>textmsg/goEdit.do?TEXTMSG_ID='+Id;
+			 diag.Width = 600;
+			 diag.Height = 390;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});
@@ -296,7 +296,7 @@
 							top.jzts();
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>taoyingyi/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>textmsg/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -315,7 +315,7 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>taoyingyi/excel.do';
+			window.location.href='<%=basePath%>textmsg/excel.do';
 		}
 		</script>
 		

@@ -34,20 +34,23 @@ import com.fh.util.PageData;
 import com.fh.util.Tools;
 import com.fh.service.${packageName}.${objectNameLower}.${objectName}Service;
 
-/** 
+/**
  * 类名称：${objectName}Controller
- * 创建人：FH 
- * 创建时间：${nowDate?string("yyyy-MM-dd")}
+ * 类描述：${packageText}控制层
+ * 创建人：陶应意
+ * 创建时间：${nowDate?string("yyyy-MM-dd HH:mm:ss")}
  */
 @Controller
 @RequestMapping(value="/${objectNameLower}")
 public class ${objectName}Controller extends BaseController {
-	
+
 	@Resource(name="${objectNameLower}Service")
 	private ${objectName}Service ${objectNameLower}Service;
-	
+
 	/**
-	 * 新增
+	 * 新增${packageText}
+	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value="/save")
 	public ModelAndView save() throws Exception{
@@ -55,7 +58,7 @@ public class ${objectName}Controller extends BaseController {
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
 		pd = this.getPageData();
-		pd.put("${objectNameUpper}_ID", this.get32UUID());	//主键
+		pd.put("${objectNameLower}_ID", this.get32UUID());	//主键
 <#list fieldList as var>
 	<#if var[3] == "否">
 		<#if var[1] == 'Date'>
@@ -66,13 +69,15 @@ public class ${objectName}Controller extends BaseController {
 	</#if>
 </#list>
 		${objectNameLower}Service.save(pd);
-		mv.addObject("msg","success");
+		mv.addObject(MSG,SUCCESS);
 		mv.setViewName("save_result");
 		return mv;
 	}
-	
+
 	/**
-	 * 删除
+	 * 删除${packageText}
+	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping(value="/delete")
 	public void delete(PrintWriter out){
@@ -81,16 +86,18 @@ public class ${objectName}Controller extends BaseController {
 		try{
 			pd = this.getPageData();
 			${objectNameLower}Service.delete(pd);
-			out.write("success");
+			out.write(SUCCESS);
 			out.close();
 		} catch(Exception e){
 			logger.error(e.toString(), e);
 		}
-		
+
 	}
-	
+
 	/**
-	 * 修改
+	 * 修改${packageText}
+	 * @param page
+	 * @return
 	 */
 	@RequestMapping(value="/edit")
 	public ModelAndView edit() throws Exception{
@@ -99,13 +106,13 @@ public class ${objectName}Controller extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		${objectNameLower}Service.edit(pd);
-		mv.addObject("msg","success");
+		mv.addObject(MSG,SUCCESS);
 		mv.setViewName("save_result");
 		return mv;
 	}
-	
+
 	/**
-	 * 列表
+	 * 列表${packageText}
 	 */
 	@RequestMapping(value="/list")
 	public ModelAndView list(Page page){
@@ -118,16 +125,16 @@ public class ${objectName}Controller extends BaseController {
 			List<PageData>	varList = ${objectNameLower}Service.list(page);	//列出${objectName}列表
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_list");
 			mv.addObject("varList", varList);
-			mv.addObject("pd", pd);
+			mv.addObject(PD, pd);
 			mv.addObject(Const.SESSION_QX,this.getHC());	//按钮权限
 		} catch(Exception e){
 			logger.error(e.toString(), e);
 		}
 		return mv;
 	}
-	
+
 	/**
-	 * 去新增页面
+	 * 去新增${packageText}页面
 	 */
 	@RequestMapping(value="/goAdd")
 	public ModelAndView goAdd(){
@@ -137,16 +144,16 @@ public class ${objectName}Controller extends BaseController {
 		pd = this.getPageData();
 		try {
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
-			mv.addObject("msg", "save");
-			mv.addObject("pd", pd);
+			mv.addObject(MSG, "save");
+			mv.addObject(PD, pd);
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
-		}						
+		}
 		return mv;
-	}	
-	
+	}
+
 	/**
-	 * 去修改页面
+	 * 去修改${packageText}页面
 	 */
 	@RequestMapping(value="/goEdit")
 	public ModelAndView goEdit(){
@@ -155,24 +162,25 @@ public class ${objectName}Controller extends BaseController {
 		PageData pd = new PageData();
 		pd = this.getPageData();
 		try {
-			pd = ${objectNameLower}Service.findById(pd);	//根据ID读取
+        	//根据ID读取
+			pd = ${objectNameLower}Service.findById(pd);
 			mv.setViewName("${packageName}/${objectNameLower}/${objectNameLower}_edit");
-			mv.addObject("msg", "edit");
-			mv.addObject("pd", pd);
+			mv.addObject(MSG, "edit");
+			mv.addObject(PD, pd);
 		} catch (Exception e) {
 			logger.error(e.toString(), e);
-		}						
+		}
 		return mv;
-	}	
-	
+	}
+
 	/**
-	 * 批量删除
+	 * ${packageText}批量删除
 	 */
 	@RequestMapping(value="/deleteAll")
 	@ResponseBody
 	public Object deleteAll() {
 		logBefore(logger, "批量删除${objectName}");
-		PageData pd = new PageData();		
+		PageData pd = new PageData();
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
 			pd = this.getPageData();
@@ -181,9 +189,9 @@ public class ${objectName}Controller extends BaseController {
 			if(null != DATA_IDS && !"".equals(DATA_IDS)){
 				String ArrayDATA_IDS[] = DATA_IDS.split(",");
 				${objectNameLower}Service.deleteAll(ArrayDATA_IDS);
-				pd.put("msg", "ok");
+				pd.put(MSG, OK);
 			}else{
-				pd.put("msg", "no");
+				pd.put(MSG, NO);
 			}
 			pdList.add(pd);
 			map.put("list", pdList);
@@ -194,9 +202,9 @@ public class ${objectName}Controller extends BaseController {
 		}
 		return AppUtil.returnObject(pd, map);
 	}
-	
+
 	/*
-	 * 导出到excel
+	 * ${packageText}导出到excel
 	 * @return
 	 */
 	@RequestMapping(value="/excel")
@@ -233,7 +241,7 @@ public class ${objectName}Controller extends BaseController {
 		}
 		return mv;
 	}
-	
+
 	/* ===============================权限================================== */
 	public Map<String, String> getHC(){
 		Subject currentUser = SecurityUtils.getSubject();  //shiro管理的session
@@ -241,7 +249,7 @@ public class ${objectName}Controller extends BaseController {
 		return (Map<String, String>)session.getAttribute(Const.SESSION_QX);
 	}
 	/* ===============================权限================================== */
-	
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder){
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");

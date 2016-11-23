@@ -6,7 +6,7 @@ import jp.sourceforge.qrcode.data.QRCodeImage;
 
 /**
  * 二维码
- * 创建人：陶应意   创建时间：2016年4月10日
+ * 创建人：FH 创建时间：2015年4月10日
  * @version
  */
 public class TwoDimensionCodeImage implements QRCodeImage {

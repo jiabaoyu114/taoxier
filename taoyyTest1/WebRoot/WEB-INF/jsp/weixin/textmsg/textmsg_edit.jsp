@@ -32,85 +32,113 @@
 	
 	//保存
 	function save(){
-			if($("#TAONAME").val()==""){
-			$("#TAONAME").tips({
+			if($("#KEYWORD").val()==""){
+			$("#KEYWORD").tips({
 				side:3,
-	            msg:'请输入名称',
+	            msg:'请输入关键词',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#TAONAME").focus();
+			$("#KEYWORD").focus();
 			return false;
 		}
-		if($("#TAOAGE").val()==""){
-			$("#TAOAGE").tips({
+		if($("#CONTENT").val()==""){
+			$("#CONTENT").tips({
 				side:3,
-	            msg:'请输入年龄',
+	            msg:'请输入内容',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#TAOAGE").focus();
+			$("#CONTENT").focus();
 			return false;
 		}
-		if($("#TAOTEL").val()==""){
-			$("#TAOTEL").tips({
+		if($("#BZ").val()==""){
+			$("#BZ").tips({
 				side:3,
-	            msg:'请输入电话',
+	            msg:'请输入备注',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#TAOTEL").focus();
+			$("#BZ").focus();
 			return false;
 		}
-		if($("#TAOEMAIL").val()==""){
-			$("#TAOEMAIL").tips({
+		if($("#STATUS").val()==""){
+			$("#form-field-radio1").tips({
 				side:3,
-	            msg:'请输入邮件',
+	            msg:'请选择状态',
 	            bg:'#AE81FF',
 	            time:2
 	        });
-			$("#TAOEMAIL").focus();
 			return false;
 		}
-		if($("#TAOASSOCIATION").val()==""){
-			$("#TAOASSOCIATION").tips({
-				side:3,
-	            msg:'请输入未知一',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#TAOASSOCIATION").focus();
-			return false;
-		}
-		$("#Form").submit();
-		$("#zhongxin").hide();
-		$("#zhongxin2").show();
+		hasK();
 	}
 	
+	//判断关键词是否存在
+	function hasK(){
+		var KEYWORD = $("#KEYWORD").val();
+		var TEXTMSG_ID = "${pd.TEXTMSG_ID}";
+		$.ajax({
+			type: "POST",
+			url: '<%=basePath%>textmsg/hasK.do',
+	    	data: {KEYWORD:KEYWORD,TEXTMSG_ID:TEXTMSG_ID,tm:new Date().getTime()},
+			dataType:'json',
+			cache: false,
+			success: function(data){
+				 if("success" == data.result){
+					$("#Form").submit();
+					$("#zhongxin").hide();
+					$("#zhongxin2").show();
+				 }else{
+					$("#KEYWORD").tips({
+						side:3,
+			            msg:'此关键词已存在(全局)!',
+			            bg:'#AE81FF',
+			            time:3
+			        });
+					return false;
+				 }
+			}
+		});
+	}
+	
+	function setType(value){
+		$("#STATUS").val(value);
+	}
 </script>
 	</head>
 <body>
-	<form action="taoyingyi/${msg }.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="TAOYINGYI_ID" id="TAOYINGYI_ID" value="${pd.TAOYINGYI_ID}"/>
+	<form action="textmsg/${msg }.do" name="Form" id="Form" method="post">
+		<input type="hidden" name="TEXTMSG_ID" id="TEXTMSG_ID" value="${pd.TEXTMSG_ID}"/>
+		<input type="hidden" name="STATUS" id="STATUS" value="${pd.STATUS}"/>
 		<div id="zhongxin">
-		<table>
+		<table id="table_report" class="table table-striped table-bordered table-hover">
 			<tr>
-				<td><input type="text" name="TAONAME" id="TAONAME" value="${pd.TAONAME}" maxlength="32" placeholder="这里输入名称" title="名称"/></td>
+				<td style="width:70px;text-align: right;padding-top: 13px;">关键词:</td>
+				<td><input style="width:95%;" type="text" name="KEYWORD" id="KEYWORD" value="${pd.KEYWORD}" maxlength="500" placeholder="这里输入关键词" title="关键词"/></td>
 			</tr>
 			<tr>
-				<td><input type="number" name="TAOAGE" id="TAOAGE" value="${pd.TAOAGE}" maxlength="32" placeholder="这里输入年龄" title="年龄"/></td>
+				<td style="width:70px;text-align: right;padding-top: 13px;">内容:</td>
+				<td>
+				<textarea style="width:95%;height:100px;" rows="10" cols="10" name="CONTENT" id="CONTENT" title="内容" maxlength="1000" placeholder="这里输入内容">${pd.CONTENT}</textarea>
+				<div><font color="#808080">请不要多于1000字否则无法发送</font></div>
+				</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="TAOTEL" id="TAOTEL" value="${pd.TAOTEL}" maxlength="32" placeholder="这里输入电话" title="电话"/></td>
+				<td style="width:70px;text-align: right;padding-top: 13px;">备注:</td>
+				<td>
+					<input style="width:95%;" type="text" name="BZ" id="BZ" value="${pd.BZ}" maxlength="500" placeholder="这里输入备注" title="备注"/>
+				</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="TAOEMAIL" id="TAOEMAIL" value="${pd.TAOEMAIL}" maxlength="32" placeholder="这里输入邮件" title="邮件"/></td>
+				<td style="width:70px;text-align: right;padding-top: 13px;">状态:</td>
+				<td>
+					<label style="float:left;padding-left: 12px;"><input name="form-field-radio" id="form-field-radio1" onclick="setType('1');" <c:if test="${pd.STATUS == '1' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">有效</span></label>
+					<label style="float:left;padding-left: 5px;"><input name="form-field-radio" id="form-field-radio2" onclick="setType('2');" <c:if test="${pd.STATUS == '2' }">checked="checked"</c:if> type="radio" value="icon-edit"><span class="lbl">无效</span></label>
+				</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="TAOASSOCIATION" id="TAOASSOCIATION" value="${pd.TAOASSOCIATION}" maxlength="32" placeholder="这里输入未知一" title="未知一"/></td>
-			</tr>
-			<tr>
-				<td style="text-align: center;">
+				<td style="text-align: center;" colspan="10">
 					<a class="btn btn-mini btn-primary" onclick="save();">保存</a>
 					<a class="btn btn-mini btn-danger" onclick="top.Dialog.close();">取消</a>
 				</td>

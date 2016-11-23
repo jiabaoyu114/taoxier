@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 上传文件
- * 创建人：陶应意  创建时间：2014年12月23日
+ * 创建人：FH 创建时间：2014年12月23日
  * @version
  */
 public class FileUpload {

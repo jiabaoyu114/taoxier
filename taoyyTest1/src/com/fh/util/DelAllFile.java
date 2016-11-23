@@ -4,7 +4,7 @@ import java.io.File;
 
 /**
  * java删除所有文件和文件夹
- * 创建人：陶应意  创建时间： 2016年1月12日
+ * 创建人：FH 创建时间：2015年1月12日
  * @version
  */
 public class DelAllFile {
@@ -25,7 +25,7 @@ public class DelAllFile {
 			delAllFile(folderPath); 	// 删除完里面所有内容
 			String filePath = folderPath;
 			filePath = filePath.toString();
-			java.io.File myFilePath = new java.io.File(filePath);
+			File myFilePath = new File(filePath);
 			myFilePath.delete(); 		// 删除空文件夹
 		} catch (Exception e) {
 			e.printStackTrace();

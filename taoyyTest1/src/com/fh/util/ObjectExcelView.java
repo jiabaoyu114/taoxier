@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 * 导入到EXCEL
 * 类名称：ObjectExcelView.java
 * 类描述： 
-* @author 陶应意
+* @author: TAOYY
 * 作者单位： 
 * 联系方式：
 * @version 1.0

@@ -18,9 +18,29 @@ public class BaseController {
     private static final long serialVersionUID = 6357869213649815390L;
     public static final String MSG = "msg";
     public static final String SUCCESS = "success";
+    public static final String RESULT = "result";
+    public static final String ERROR = "error";
     public static final String OK = "ok";
     public static final String NO = "no";
     public static final String PD = "pd";
+    /**
+     * 请求失败
+     */
+    public static final String STR_ZERO= "00";
+    /**
+     * 请求成功
+     */
+    public static final String STR_ONE = "01";
+    /**
+     * 返回空值
+     */
+    public static final String STR_TWO = "02";
+    /**
+     * 请求协议参数不完整
+     */
+    public static final String STR_THREE = "03";
+    public static final String STR_FOUR= "04";
+    public static final String STR_FIVE= "05";
 
     /**
      * 得到PageData
