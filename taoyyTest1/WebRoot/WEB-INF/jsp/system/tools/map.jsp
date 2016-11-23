@@ -49,7 +49,7 @@
 					</div>
 					<div style="margin-top: -5px;">
 						&nbsp;&nbsp;
-						<button class="btn btn-app btn-light btn-mini"  onclick="openMap();">
+						<button class="btn btn-app btn-light btn-mini"  onclick="openMap1();">
 						<i class="icon-globe"></i>
 						</button>
 					</div>
@@ -102,18 +102,20 @@
 	
 </div><!--/#page-content-->
 </div><!--/.fluid-container#main-container-->
-		
-		
+
+
 		<!-- 引入 -->
 		<script type="text/javascript">window.jQuery || document.write("<script src='static/js/jquery-1.9.1.min.js'>\x3C/script>");</script>
 		<script src="static/js/bootstrap.min.js"></script>
 		<script src="static/js/ace-elements.min.js"></script>
 		<script src="static/js/ace.min.js"></script>
+
 		<!-- 引入 -->
-		<!--引入属于此页面的js -->
 		<!--提示框-->
 		<script type="text/javascript" src="static/js/jquery.tips.js"></script>
-		<script type="text/javascript" src="static/js/myjs/map.js"></script>
+		<!--引入属于此页面的js -->
+		<script type="text/javascript" src="static/js/myjs/maps.js"></script>
+
 	</body>
 </html>
 

@@ -55,7 +55,7 @@
 	</head>
 <body>
 	<form action="${objectNameLower}/${r"${msg }"}.do" name="Form" id="Form" method="post">
-		<input type="hidden" name="${objectNameUpper}_ID" id="${objectNameUpper}_ID" value="${r"${pd."}${objectNameUpper}_ID${r"}"}"/>
+		<input type="hidden" name="${objectNameLower}_ID" id="${objectNameLower}_ID" value="${r"${pd."}${objectNameLower}_ID${r"}"}"/>
 		<div id="zhongxin">
 		<table>
 <#list fieldList as var>

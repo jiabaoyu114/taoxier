@@ -9,22 +9,23 @@ $ (function () {
 });
 $ (top.hangge ());
 $ (top.hangge ());
-function openMap() {
-    alert (12123123123);
-   //var result = showModalDialog (locat + "/tool/mapXY.do", "", "dialogWidth=650px;dialogHeight=500px;");
-    var result = null;
-    alert (2);
+var iWidth = 650;
+var iHeight = 400;
+var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
+var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
+function openMap1() {
+   var result = open (locat + "/tool/mapXY.do", "", "width=" + iWidth + ", height=" + iHeight + ",top=" + iTop + ",left=" + iLeft + ",toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no,alwaysRaised=yes,depended=yes");
     if (result == null || "" == result) {
         return;
     } else {
         var result = result.split ("-");
+     //   window.opener.document.getElementById(“ZUOBIAO_X”).value = "数据";
         document.getElementById ("ZUOBIAO_X").value = result[0];
         document.getElementById ("ZUOBIAO_Y").value = result[1];
     }
 }
 function openMap2() {
-    //var result = showModalDialog (locat + "/tool/mapXY.do", "", "dialogWidth=650px;dialogHeight=500px;");
-    var result = null;
+    var result = open (locat + "/tool/mapXY.do", "", "width=" + iWidth + ", height=" + iHeight + ",top=" + iTop + ",left=" + iLeft + ",toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no,alwaysRaised=yes,depended=yes");
     if (result == null || "" == result) {
         return;
     } else {
