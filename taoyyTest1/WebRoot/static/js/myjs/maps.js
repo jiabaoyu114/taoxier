@@ -14,6 +14,7 @@ var iHeight = 400;
 var iTop = (window.screen.availHeight - 30 - iHeight) / 2;
 var iLeft = (window.screen.availWidth - 10 - iWidth) / 2;
 function openMap1() {
+    alert (1);
    var result = open (locat + "/tool/mapXY.do", "", "width=" + iWidth + ", height=" + iHeight + ",top=" + iTop + ",left=" + iLeft + ",toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no,alwaysRaised=yes,depended=yes");
     if (result == null || "" == result) {
         return;
